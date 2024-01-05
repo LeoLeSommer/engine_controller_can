@@ -1,0 +1,33 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "preLaunchTask": "Build debug",
+      "type": "cortex-debug",
+      "request": "launch",
+      "servertype": "openocd",
+      "cwd": "${workspaceRoot}",
+      "executable": "./target/thumbv7em-none-eabihf/debug/engine_controller",
+      "name": "Debug (OpenOCD)",
+      "device": "STM32F303RETx",
+      "configFiles": ["interface/stlink-v2-1.cfg", "target/stm32f3x.cfg"],
+      "runToEntryPoint": "main"
+    },
+    {
+      "name": "Python CAN Sender",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceRoot}/can_sender/can_sender.py",
+      "console": "integratedTerminal",
+      "args": [
+        "--channel",
+        "/dev/tty.usbmodem11203",
+        "--bitrate",
+        "500000",
+        "--path",
+        "gears.txt"
+      ],
+      "cwd": "${workspaceRoot}/can_sender"
+    }
+  ]
+}
